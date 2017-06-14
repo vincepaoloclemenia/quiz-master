@@ -1,0 +1,47 @@
+<div class="col-md-6 col-md-offset-3">
+  <div class="action-form">
+    <h2>Sign up</h2>
+     <div class="form-actions">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+            <div class="field">
+              <%= f.label :first_name %><br />
+              <%= f.text_field :first_name, autofocus: true, required: true  %>
+            </div>
+          <br/>
+            <div class="field">
+              <%= f.label :last_name %><br />
+              <%= f.text_field :last_name, required: true %>
+            </div>
+          <br/>
+            <div class="field">
+              <%= f.label "Please select" %> <br />
+              <%= f.select :user_type, options_for_select(User::USER_TYPE), include_blank: "Type" %>
+            </div>
+          <br/>
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email %>
+            </div>
+          <br/>
+            <div class="field">
+              <%= f.label :password %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+                <%= f.password_field :password, autocomplete: "off" %>
+            </div>
+          <br/>
+            <div class="field">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            </div>
+          <br/>
+            <div class="form-actions">
+              <%= f.submit "Sign up", class: "btn btn-primary" %>
+            </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+  

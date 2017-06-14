@@ -1,0 +1,34 @@
+<% if current_user.enrolling?(User.find(params[:id])) %>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="action-form">
+      <center><h3>Quizzes from Teacher <%= User.find(params[:id]).first_name %></h3></center>
+        <br/>
+        <div class="form-actions">
+          <% for @q in @quizzes %>
+            <% if Answer.where(quiz_id: @q.id).where(user_id: current_user.id).count == 0  %>
+              <%= form_for ([@q, @q.answers.build]) do |f| %>  
+                <div class="field">
+                    <%= f.label @q.question %></td>
+                </div>
+                  <br/>
+                <div class="field">
+                    <%= f.text_field :ans, placeholder: "Put your answer here" %></td>
+                </div>
+                  <br/>
+                <div class="field">
+                    <%= f.submit "Answer it!", class: "btn btn-primary" %></td>
+                </div>  
+              <% end %>
+            <% end %>
+          <% end %>
+        <br/>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <h5><i>You have to enroll first</i></h5>
+
+  <%= link_to "Back", home_path, class: "btn btn-primary" %>
+
+<% end %>

@@ -1,0 +1,187 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import url(http://fonts.googleapis.com/css?family=Lora|Ubuntu:300,400,500); 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$gray-medium-light: #eaeaea;
+$main-color: #184e70;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* Variables, mixins, etc.. */
+
+@mixin background-tile {
+	margin-top: 10%;
+	box-sizing: border-box;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 6px #ccc;
+	padding: 1.5em 1.25em;
+}
+
+
+/* General styles */
+
+
+body {
+	background-color: #F3FFFE;
+	font-family: 'Lora', serif;
+	margin-top: 5%;
+	margin-bottom: 2%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 300;
+}
+
+.true{
+	background-color: #A3FE88;
+}
+
+.false{
+	background-color: #FE8888;
+}
+.notice-wrapper-success{
+		margin: 0;
+		width: 100%;
+		padding: 2.5rem 0;
+		text-align: center;
+		background-color: #0AA26F;
+		color: white;
+		letter-spacing:  1px;
+		font-weight: 700;
+	}
+.notice-wrapper-danger{
+		margin: 0;
+		width: 100%;
+		padding: 2.5rem 0;
+		text-align: center;
+		background-color: #FC5252;
+		color: white;
+		letter-spacing:  1px;
+		font-weight: 700;		
+}
+
+
+input:not(.btn-primary) {
+		width: 95%;
+		border: 0;
+  		outline: 0;
+  		background: transparent;
+  		border-bottom: 1px solid black;
+	}
+
+/* Navbar/navigation styles */
+
+.navbar {
+	font-family: 'Ubuntu', sans-serif;
+	text-transform: uppercase;
+	position: fixed;
+	top: 0;
+    z-index: 999;
+	width: 100%;
+}
+.navbar-default {
+	background-color: #184e70;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	
+
+	.navbar-nav > li > a {
+		color: #F2FFFF;
+		&:hover {
+			color: darken(#e4627e, 5%);
+			transition: 0.5s;
+		}
+	}
+
+	.navbar-header {
+
+		.navbar-brand {
+			color: #e4627e;
+			letter-spacing: 1.4px;
+		}
+
+	}
+
+	.dropdown-menu > li > a:hover {
+		background-color: darken(#e4627e, 5%);
+		color: #fff;
+	}
+
+	.navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+		background-color: darken(#e4627e, 5%);
+		color: #fff;	
+	}
+
+}
+
+
+
+
+/* Button/link styles */
+
+.btn-primary {
+	color: darken($main-color, 5%);
+	background-color: #fff;
+	border: 1px solid darken($main-color, 5%);
+	padding: 8px 20px;
+	border-radius: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	&:hover {
+		text-decoration: none;
+		background-color: darken($main-color, 5%);
+		color: #fff;
+		transition: 0.5s;
+	}
+}
+
+.btn-custom2 {
+	color: darken(#F3FFFE, 5%);
+	background-color: $main-color;
+	border: 1px solid darken(#F3FFFE, 5%);
+	padding: 8px 20px;
+	border-radius: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	&:hover {
+		text-decoration: none;
+		background-color: darken(#F3FFFE, 5%);
+		color: $main-color;
+		transition: 0.5s;
+	}
+}
+
+/* Signup/Login form styles */
+
+.action-form {
+	@include background-tile;
+
+	.form-actions{
+			margin-left: 5%;
+	}
+	h2 {
+		margin-top: 0;
+	}
+}
+
+
+

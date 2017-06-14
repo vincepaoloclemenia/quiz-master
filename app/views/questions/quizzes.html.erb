@@ -1,0 +1,5 @@
+<% if current_user.answers.where(teacher_id: User.find(params[:id])).count < Quiz.where(user_id: User.find(params[:id])).count %>
+  <%= render '/questions/untaken.html.erb' %>
+<% else %>
+  <%= render '/questions/taken.html.erb' %>
+<% end %>

@@ -1,0 +1,35 @@
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Questions</th>
+          <th>Correct Answer</th>
+          <th>Your Answer</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      
+      <% for @a in @answers %>
+      <tbody>
+        <tr class="<%= @a.is_correct%>">
+          <td><%= @a.quiz.question %></td>
+          <td><%= @a.quiz.answer %></td>
+          <td><%= @a.ans %></td>
+          <td ><% if @a.is_correct %>
+              Correct 
+              <% else %> 
+              Incorrect 
+              <% end %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+
+  <div>
+    <h4>Total Score: <b><%= current_user.answers.where(is_correct: true, teacher_id: User.find(params[:id])).count %></b> </h4>
+  </div>
+
+<br/>
+
+<%= link_to "Try Again!", try_again_path(User.find(params[:id])), method: :delete, class: "btn btn-primary"  %>
+

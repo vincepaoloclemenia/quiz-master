@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quiz Master</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+  </head>
+
+  <body>
+      <nav class = "navbar navbar-default">          
+        <div class = "container">
+          <div class="navbar-header">
+            <%= link_to "Quiz Master", root_path, class: "navbar-brand" %>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <% if !user_signed_in? %>             
+                  <li><%= link_to "Sign Up", new_user_registration_path %></li> 
+                  <li><%= link_to "Log in", new_user_session_path %></li>      
+            <% else %>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.first_name+" "+current_user.last_name%><span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+                        <li role="separator" class="divider"></li>
+                        <li><%= link_to "Signt Out", destroy_user_session_path, method: :delete %></li>
+                      </ul>
+                  </li>  
+            <% end %>
+          </ul>
+        </div>
+      </nav>     
+        <% if notice %>
+          <%= react_component('NoticeWrapper', { message: notice, type: 'success' }) %>
+        <% end %>
+
+        <% if alert %>
+          <%= react_component('NoticeWrapper', { message: alert, type: 'danger' }) %>
+        <% end %>
+      <div class="container">
+        <%= yield %>        
+      </div> 
+  </body>
+</html>

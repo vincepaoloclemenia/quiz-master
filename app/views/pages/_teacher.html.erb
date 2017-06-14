@@ -1,0 +1,84 @@
+<h1>Teacher</h1>
+
+<h2>My Quizzes</h2> 
+ 
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Answer</th>
+        </tr>
+      </thead>
+      <% for @q in @quizzes %>
+        <tbody>
+          <tr>
+          <td><%= @q.question %></td>
+          <td><%= @q.answer %></td>
+          <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<%= @q.id %>">Edit</button></td>
+          <!-- Modal for Edit -->
+            <div id=<%= @q.id %> class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Question</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= form_for @q do |f| %>
+                    <div class="field">
+                    Question:
+                        <%= f.text_field :question, required: true, autofocus: true %>    
+                    </div>
+                    <div class="field">
+                    Correct Answer:
+                        <%= f.text_field :answer, required: true %>    
+                    </div>
+                      <p><%= f.submit "Update Question", class: "btn btn-primary" %></p>
+                    <% end %>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <td><%= link_to "Delete", quiz_path(@q), method: :delete, data:{ confirm: "Are you sure?"}, class: "btn btn-danger" %></td>
+          </tr>
+        </tbody>
+      <% end %>
+</table>
+<!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-custom2" data-toggle="modal" data-target="#myModal">Add Question</button>
+<!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+<!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Create Question</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_for @newQuiz do |f| %>
+            <div class="field">
+            Question:
+                <%= f.text_field :question, required: true, autofocus: true %>    
+            </div>
+            <div class="field">
+            Correct Answer:
+                <%= f.text_field :answer, required: true %>    
+            </div>
+            <br/>
+            <p><%= f.submit "Add Question", class: "btn btn-primary" %></p>
+            
+            <% end %>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+

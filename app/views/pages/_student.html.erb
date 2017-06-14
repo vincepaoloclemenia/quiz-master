@@ -1,0 +1,47 @@
+<h1>Student</h2>
+<table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Teacher's Name</th>
+          <th>Status</th>
+          <th>Your Score</th>
+        </tr>
+      </thead>
+      <% for @u in @users %>
+      <% if @u.quizzes.count > 0 %>
+      <tbody>
+        <tr>
+        <td><%= @u.first_name %></td>
+        <td>
+          <% if current_user.answers.where(teacher_id: @u.id).count == Quiz.where(user_id: @u.id).count && Quiz.where(user_id: @u.id).count != 0  %>
+          Completed!
+          <% elsif current_user.answers.where(teacher_id: @u.id).count > 0 && current_user.answers.where(teacher_id: @u.id).count < Quiz.where(user_id: @u.id).count && Quiz.where(user_id: @u.id).count %>
+            Incomplete
+          <% else %>
+            Unanswered
+           <% end %>
+        </td>
+        <td>
+        <% if current_user.answers.where(teacher_id: @u.id).count == Quiz.where(user_id: @u.id).count && @u.quizzes.count != 0  %>
+          <%= current_user.answers.where(is_correct: true, teacher_id: @u.id).count %> / <%= @u.quizzes.count %>
+        <% elsif current_user.answers.where(teacher_id: @u.id).count > 0 && current_user.answers.where(teacher_id: @u.id).count < Quiz.where(user_id: @u.id).count && Quiz.where(user_id: @u.id).count %>
+          You have answered <%= current_user.answers.where(teacher_id: @u.id).count %> / <%= @u.quizzes.count %> quiz(zes)
+        <% else %>
+        There are <%= @u.quizzes.count %> quiz(zes)
+        <% end %>
+        </td>
+        <td>
+          <% unless current_user.enrolling?(@u) %>
+					  <%= form_for(current_user.active_relationships.build) do |f| %>
+						  <div><%= hidden_field_tag :enrolled_id, @u.id %></div>
+						  <%= f.submit "Enroll", class: "btn btn-primary" %>
+					  <% end %>
+              <% else %>
+              <%= link_to "Show", questions_path(@u.id), class: "btn btn-primary"%>
+		      <% end %>
+        </td>
+        </tr>
+      </tbody>
+      <% end %>
+    <% end %>
+</table>
